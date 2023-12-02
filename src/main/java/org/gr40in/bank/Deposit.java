@@ -1,15 +1,14 @@
 package org.gr40in.bank;
 
-import java.time.LocalDateTime;
-
 public class Deposit extends AccountOperation {
-    @Override
-    public boolean runOperation() {
-        return false;
+
+    public static Deposit create(Account account, Double amountOfFunds) {
+        if (amountOfFunds <= 0)
+            throw new IllegalArgumentException("System doesn't work with zero or negative amount");
+        return new Deposit(account, amountOfFunds);
     }
 
-
-    public Deposit(Account account, Double amountOfFunds) {
+    private Deposit(Account account, Double amountOfFunds) {
         super(account, amountOfFunds);
     }
 }

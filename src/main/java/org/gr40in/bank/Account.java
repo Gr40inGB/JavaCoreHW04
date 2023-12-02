@@ -1,6 +1,9 @@
 package org.gr40in.bank;
 
 import java.math.BigDecimal;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.SecureDirectoryStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,7 @@ public class Account {
     private String fullName;
     private BigDecimal balance;
     private List<AccountOperation> transactions;
+
 
     /**
      * checked parameters before create Account
@@ -26,12 +30,16 @@ public class Account {
         return new Account(fullName, BigDecimal.valueOf(balance));
     }
 
-    public boolean operationAllowed (AccountOperation operation){
-
+    public boolean operationAllowed(AccountOperation operation) {
+        return operation.getAmountOfFunds().add(balance).compareTo(BigDecimal.ZERO) > 0;
     }
 
-    public boolean add (AccountOperation operation){
-
+    public boolean add(AccountOperation operation) throws Exception {
+        if (operationAllowed(operation)) {
+            balance = operation.getAmountOfFunds().add(balance);
+            return transactions.add(operation);
+        } else throw new InsufficientFundsException(String.format("Operation with this %s amount of funds denied!",
+                operation.getAmountOfFunds().toString()));
     }
 
     private Account(String fullName, BigDecimal balance) {
@@ -46,7 +54,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "id" + id + " " + fullName + " [" + balance + "$]";
+        return "acc_id:" + id + " " + fullName + " [" + balance + "$]";
     }
 
     public Long getId() {

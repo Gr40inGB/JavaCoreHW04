@@ -2,6 +2,7 @@ package org.gr40in.bank;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public abstract class AccountOperation {
     private static Long idGenerator = 0L;
@@ -9,15 +10,23 @@ public abstract class AccountOperation {
     private Account account;
     private LocalDateTime dateTime;
     private BigDecimal amountOfFunds;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd hh:mm:ss");
+    private boolean approved;
 
-    public void runOperation(){
-        if (operationAllowed()) {
-            account.add(this);
+    public boolean runOperation() throws Exception {
+        if (account != null) {
+            return approved = account.add(this);
         }
+        return false;
     }
 
-    public boolean operationAllowed() {
-        return account.operationAllowed(this);
+    @Override
+    public String toString() {
+        return "op_id:" + operationID +
+                " " + account.getFullName() +
+                " " + dateTime.format(formatter) +
+                " " + amountOfFunds +
+                " " + (approved ? "approved" : "denied");
     }
 
     public AccountOperation(Account account, Double amountOfFunds) {
