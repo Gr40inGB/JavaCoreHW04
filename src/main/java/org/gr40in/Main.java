@@ -53,6 +53,8 @@ public class Main {
             System.out.println(operation2);
         } catch (InsufficientFundsException e) {
             System.out.println("you don’t have that kind of money, dude");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage() + warning);
         }
 
         System.out.println("---------------------------------------------------------------");

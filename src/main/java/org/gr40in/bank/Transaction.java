@@ -8,7 +8,6 @@ import java.util.Locale;
 
 public class Transaction {
 
-
     private LocalDateTime dateTime;
     private List<AccountOperation> operationList;
     private boolean approved;
@@ -27,12 +26,10 @@ public class Transaction {
     }
 
     public boolean run() throws InsufficientFundsException {
-
         for (AccountOperation operation : operationList) {
             operation.runOperation();
         }
         return approved = true;
-
     }
 
     public List<AccountOperation> getOperationList() {
