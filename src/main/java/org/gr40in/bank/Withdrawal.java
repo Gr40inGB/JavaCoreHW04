@@ -4,7 +4,7 @@ public class Withdrawal extends AccountOperation {
 
     public static Withdrawal create(Account account, Double amountOfFunds) {
         if (amountOfFunds <= 0)
-            throw new IllegalArgumentException("System doesn't work with zero or negative amount");
+            throw new IllegalArgumentException("System doesn't work with zero or negative amount. ");
         return new Withdrawal(account, amountOfFunds);
     }
 

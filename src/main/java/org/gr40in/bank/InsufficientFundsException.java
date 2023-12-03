@@ -1,6 +1,6 @@
 package org.gr40in.bank;
 
-public class InsufficientFundsException extends Exception{
+public class InsufficientFundsException extends Exception {
     public InsufficientFundsException(String message) {
         super(message);
     }

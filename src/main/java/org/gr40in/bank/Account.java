@@ -14,7 +14,6 @@ public class Account {
     private BigDecimal balance;
     private List<AccountOperation> transactions;
 
-
     /**
      * checked parameters before create Account
      *
@@ -34,7 +33,7 @@ public class Account {
         return operation.getAmountOfFunds().add(balance).compareTo(BigDecimal.ZERO) > 0;
     }
 
-    public boolean add(AccountOperation operation) throws Exception {
+    public boolean add(AccountOperation operation) throws InsufficientFundsException {
         if (operationAllowed(operation)) {
             balance = operation.getAmountOfFunds().add(balance);
             return transactions.add(operation);

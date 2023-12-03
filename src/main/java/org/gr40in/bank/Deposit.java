@@ -4,7 +4,7 @@ public class Deposit extends AccountOperation {
 
     public static Deposit create(Account account, Double amountOfFunds) {
         if (amountOfFunds <= 0)
-            throw new IllegalArgumentException("System doesn't work with zero or negative amount");
+            throw new IllegalArgumentException("Deposit cant be negative");
         return new Deposit(account, amountOfFunds);
     }
 

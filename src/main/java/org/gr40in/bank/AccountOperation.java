@@ -13,7 +13,7 @@ public abstract class AccountOperation {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd hh:mm:ss");
     private boolean approved;
 
-    public boolean runOperation() throws Exception {
+    public boolean runOperation() throws InsufficientFundsException {
         if (account != null) {
             return approved = account.add(this);
         }
